@@ -7,6 +7,7 @@ OPERATION_SERVICE_HOST=<host># e.g. 127.0.0.1
 OPERATION_SERVICE_PORT=<port># e.g. 8080
 TALK_SERVICE_HOST=<host># e.g. 127.0.0.1
 TALK_SERVICE_PORT=<port># e.g. 8081
+FB_API_KEY=<apiKey># firebaseのprojectの設定から見れます。
 ```
 
 同様に.env.*.localを作成しアカウントの情報を記載してください。  
