@@ -1,3 +1,4 @@
 gen
 .env.local
 .env.*local
+bin
