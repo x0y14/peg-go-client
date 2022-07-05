@@ -1,7 +1,7 @@
 # peg-go-client
 guiを伴わなず、情報取得と送信を分離した動作確認用クライアント
 
-.env.localをプロジェクトルートに作成し、以下の4点を記載してください。  
+.env.localをプロジェクトルートに作成し、以下の5点を記載してください。  
 ```dotenv
 OPERATION_SERVICE_HOST=<host># e.g. 127.0.0.1
 OPERATION_SERVICE_PORT=<port># e.g. 8080
