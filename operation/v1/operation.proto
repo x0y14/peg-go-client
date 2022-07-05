@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package operation.v1;
+
+//option go_package = "backend/gen/operation/v1;operationv1";
+
+import "types/v1/types.proto";
+
+message FetchOperationsRequest {
+  int64 onset_operation_id = 1;
+}
+message FetchOperationsResponse {
+  types.v1.Operation operation = 1;
+  types.v1.Message message = 2;
+}
+
+service OperationService {
+  rpc FetchOperations(FetchOperationsRequest) returns (stream FetchOperationsResponse) {};
+}
