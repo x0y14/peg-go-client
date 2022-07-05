@@ -41,7 +41,7 @@ const (
 	apiKey = "AIzaSyArrayyPp5YZO-3Oss5d73Zzpwgn10re4s"
 )
 
-func GetAuthToken(email string, password string) (string, error) {
+func GetAuthToken(email string, password string) (string, string, error) {
 	url := fmt.Sprintf("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=%s", apiKey)
 
 	req := GetAuthTokenRequest{
@@ -52,12 +52,12 @@ func GetAuthToken(email string, password string) (string, error) {
 
 	reqBytes, err := json.Marshal(req)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer(reqBytes))
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 	defer resp.Body.Close()
 
@@ -65,16 +65,16 @@ func GetAuthToken(email string, password string) (string, error) {
 		var r GetAuthTokenErrorResponse
 		err = json.NewDecoder(resp.Body).Decode(&r)
 		if err != nil {
-			return "", err
+			return "", "", err
 		}
-		return "", fmt.Errorf("failed to get auth token(code=%v): %v", r.Error.Code, r.Error.Message)
+		return "", "", fmt.Errorf("failed to get auth token(code=%v): %v", r.Error.Code, r.Error.Message)
 	} else {
 		var r GetAuthTokenSuccessResponse
 		err = json.NewDecoder(resp.Body).Decode(&r)
 		if err != nil {
-			return "", err
+			return "", "", err
 		}
 
-		return r.IdToken, nil
+		return r.IdToken, r.LocalId, nil
 	}
 }
