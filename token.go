@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 type GetAuthTokenRequest struct {
@@ -36,13 +37,8 @@ type GetAuthTokenSuccessResponse struct {
 	ExpiresIn    string `json:"expiresIn"`
 }
 
-const (
-	// apikeyは公開しても問題ないらしい
-	apiKey = "AIzaSyArrayyPp5YZO-3Oss5d73Zzpwgn10re4s"
-)
-
 func GetAuthToken(email string, password string) (string, string, error) {
-	url := fmt.Sprintf("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=%s", apiKey)
+	url := fmt.Sprintf("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=%s", os.Getenv("FB_API_KEY"))
 
 	req := GetAuthTokenRequest{
 		Email:             email,
